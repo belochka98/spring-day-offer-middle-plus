@@ -1,8 +1,8 @@
 package com.onedayoffer.taskdistribution;
 
-import com.onedayoffer.taskdistribution.DTO.EmployeeDTO;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.EmployeeDto;
 import com.onedayoffer.taskdistribution.utils.DataGenerator;
-import com.onedayoffer.taskdistribution.DTO.TaskDTO;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.TaskDto;
 import com.onedayoffer.taskdistribution.services.TaskDistributor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class DistributionTest {
 
     @Test
     public void shouldDistribute() {
-        List<EmployeeDTO> employees = dataGenerator.getEmployees();
-        List<TaskDTO> tasks = dataGenerator.getTasks();
+        List<EmployeeDto> employees = dataGenerator.getEmployees();
+        List<TaskDto> tasks = dataGenerator.getTasks();
         taskDistributor.distribute(employees, tasks);
 
         employees.forEach((e) -> System.out.println(e.getFio() + ' ' + e.getTotalLeadTime()));

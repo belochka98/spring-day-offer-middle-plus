@@ -1,9 +1,9 @@
 package com.onedayoffer.taskdistribution.utils;
 
-import com.onedayoffer.taskdistribution.DTO.EmployeeDTO;
-import com.onedayoffer.taskdistribution.DTO.TaskDTO;
-import com.onedayoffer.taskdistribution.DTO.TaskStatus;
-import com.onedayoffer.taskdistribution.DTO.TaskType;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.EmployeeDto;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.TaskDto;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.TaskStatus;
+import com.onedayoffer.taskdistribution.web.api.v1.dto.TaskType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,14 +11,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Sviridov_V_A
+ * @version 1.0.0-SNAPSHOT
+ * @since 2024-03-23
+ */
 @Component
 public class DataGenerator {
-
-    public List<TaskDTO> getTasks() {
+    public List<TaskDto> getTasks() {
         return taskPack1();
     }
 
-    public List<EmployeeDTO> getEmployees() { return employeePack1(); }
+    public List<EmployeeDto> getEmployees() { return employeePack1(); }
 
     private int[] leadTimeDirectory = {30, 60, 90, 120, 240};
 
@@ -29,13 +33,13 @@ public class DataGenerator {
 
     private RandomEnumGenerator<TaskType> taskTypeGenerator = new RandomEnumGenerator<>(TaskType.class);
 
-    private List<TaskDTO> randomTasksGenerator() {
+    private List<TaskDto> randomTasksGenerator() {
         Random rn = new Random();
-        ArrayList<TaskDTO> tasks = new ArrayList<>();
+        ArrayList<TaskDto> tasks = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             int priority = rn.nextInt(10) + 1;
             int leadTime = leadTimeDirectory[rn.nextInt(5)];
-            tasks.add(new TaskDTO(null, "task" + (i + 1),
+            tasks.add(new TaskDto(null, "task" + (i + 1),
                     taskTypeGenerator.randomEnum(),
                     TaskStatus.APPOINTED,
                     priority,
@@ -44,11 +48,11 @@ public class DataGenerator {
         return tasks;
     }
 
-    private List<TaskDTO> taskPack1() {
-        List<TaskDTO> tasks = new ArrayList<>();
+    private List<TaskDto> taskPack1() {
+        List<TaskDto> tasks = new ArrayList<>();
         for (int i = 0; i<initArray.length-1; i++) {
             tasks.add(
-                    new TaskDTO(null, "task" + (i + 1),
+                    new TaskDto(null, "task" + (i + 1),
                             taskTypeGenerator.randomEnum(),
                             TaskStatus.APPOINTED,
                             initArray[i][0], initArray[i][1])
@@ -57,33 +61,33 @@ public class DataGenerator {
         return tasks;
     }
 
-    private List<TaskDTO> taskPack2() {
+    private List<TaskDto> taskPack2() {
         return List.of(
-                new TaskDTO(null, "task1", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 60),
-                new TaskDTO(null, "task2", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 94),
-                new TaskDTO(null, "task3", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 70),
-                new TaskDTO(null, "task4", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 95),
-                new TaskDTO(null, "task5", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 40),
-                new TaskDTO(null, "task6", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 90),
-                new TaskDTO(null, "task7", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 4, 30),
-                new TaskDTO(null, "task8", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 5, 90),
-                new TaskDTO(null, "task9", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 6, 60),
-                new TaskDTO(null, "task10", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 7, 65),
-                new TaskDTO(null, "task11", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 7, 90),
-                new TaskDTO(null, "task12", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 2, 60),
-                new TaskDTO(null, "task13", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 2, 68),
-                new TaskDTO(null, "task14", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 95),
-                new TaskDTO(null, "task15", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 90)
+                new TaskDto(null, "task1", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 60),
+                new TaskDto(null, "task2", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 94),
+                new TaskDto(null, "task3", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 70),
+                new TaskDto(null, "task4", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 95),
+                new TaskDto(null, "task5", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 40),
+                new TaskDto(null, "task6", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 3, 90),
+                new TaskDto(null, "task7", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 4, 30),
+                new TaskDto(null, "task8", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 5, 90),
+                new TaskDto(null, "task9", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 6, 60),
+                new TaskDto(null, "task10", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 7, 65),
+                new TaskDto(null, "task11", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 7, 90),
+                new TaskDto(null, "task12", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 2, 60),
+                new TaskDto(null, "task13", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 2, 68),
+                new TaskDto(null, "task14", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 95),
+                new TaskDto(null, "task15", taskTypeGenerator.randomEnum(), TaskStatus.APPOINTED, 1, 90)
         );
     }
 
-    private List<EmployeeDTO> employeePack1() {
+    private List<EmployeeDto> employeePack1() {
         return List.of(
-                new EmployeeDTO("Andrey", "hall manager"),
-                new EmployeeDTO("Svetlana", "hall cleaner"),
-                new EmployeeDTO("Mariya", "hall employee"),
-                new EmployeeDTO("Dmitry", "hall employee"),
-                new EmployeeDTO("David", "hall employee"));
+                new EmployeeDto("Andrey", "hall manager"),
+                new EmployeeDto("Svetlana", "hall cleaner"),
+                new EmployeeDto("Mariya", "hall employee"),
+                new EmployeeDto("Dmitry", "hall employee"),
+                new EmployeeDto("David", "hall employee"));
     }
 
     public boolean equalLists(List<String> one, List<String> two) {
