@@ -14,18 +14,9 @@ import java.util.List;
  * @since 2024-03-23
  */
 @Component("TaskDistributorImpl")
-public class TaskDistributorImpl implements TaskDistributor {
-    private static final int overheadTime = 420;
-
+public class TaskDistributorImpl extends AbstractTaskDistributor {
     @Override
-    public void distribute(List<EmployeeDto> employees, List<TaskDto> tasks) {
-        if (CollectionUtils.isEmpty(employees)) {
-            throw new IllegalArgumentException("Employees is empty");
-        }
-        if (CollectionUtils.isEmpty(tasks)) {
-            throw new IllegalArgumentException("Tasks is empty");
-        }
-
+    protected void action(List<EmployeeDto> employees, List<TaskDto> tasks) {
         tasks.stream()
                 .sorted(Comparator.comparingInt(TaskDto::getPriority))
                 .forEach(task -> employees.forEach(employee -> {
